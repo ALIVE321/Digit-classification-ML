@@ -1,0 +1,8 @@
+# Source: http://ufldl.stanford.edu/housenumbers/
+extra_32x32.mat
+test_32x32.mat
+train_32x32.mat
+test/
+train/
+extra/
+*.tar.gz

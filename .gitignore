@@ -1,3 +1,6 @@
+# Data Cache
+*.pickle
+
 # Pycharm Project OCnfiguration
 .idea/
 

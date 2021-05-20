@@ -1,3 +1,4 @@
 extra/
 test/
 train/
+*.pickle

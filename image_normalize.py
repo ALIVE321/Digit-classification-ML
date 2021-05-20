@@ -1,5 +1,5 @@
 # To normalize the image data into 32x32 gray-scale images
-# Will be saved as ./data/train.pickle and ~/test.pickle
+# Will be saved as ./data/train_data.pickle and ~/test_data.pickle
 
 import numpy as np
 import cv2

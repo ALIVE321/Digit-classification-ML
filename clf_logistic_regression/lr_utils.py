@@ -2,6 +2,7 @@ import numpy as np
 import torch
 from tqdm import tqdm
 
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 def sigmoid(x):
     return 1 / (1 + torch.exp(-1 * x))
@@ -10,7 +11,7 @@ def sigmoid(x):
 class LogisticRegression:
     def __init__(self, shape):
         self.n, self.p = shape
-        self.beta = torch.zeros((self.p,))
+        self.beta = torch.zeros((self.p,), device=device)
         self.best_beta = None
         self.best_acc = 0
 
@@ -28,7 +29,7 @@ class LogisticRegression:
                 partial_beta = torch.sum((y_batch - p).reshape((-1, 1)) * X_batch, dim=0)
                 self.beta = self.beta + partial_beta * lr
                 p = self.predict(X_batch)
-                acc = torch.sum((p > 0.5) == y_batch) / len(p)
+                acc = torch.sum((p > 0.5) == y_batch).item() / len(p)
                 if acc > self.best_acc:
                     self.best_acc = acc
                     self.best_beta = self.beta
@@ -48,7 +49,7 @@ class LogisticRegression:
                 partial_beta = torch.sum((y_batch - p).reshape((-1,1)) * X_batch, dim=0) + _lambda * self.beta
                 self.beta = self.beta + partial_beta * lr
                 p = self.predict(X_batch)
-                acc = torch.sum((p > 0.5) == y_batch) / len(p)
+                acc = torch.sum((p > 0.5) == y_batch).item() / len(p)
                 if acc > self.best_acc:
                     self.best_acc = acc
                     self.best_beta = self.beta
@@ -68,6 +69,6 @@ class LogisticRegression:
                 self.beta[d] = np.sign(y_est) * max(.0, abs(y_est) - _lambda / norm)
             _lambda /= 10
             p = self.predict(X)
-            acc = torch.sum((p > 0.5) == y) / len(p)
+            acc = torch.sum((p > 0.5) == y).item() / len(p)
             print(f"Iteration: {itr:4d}, Training Acc: {acc:.4f}")
 

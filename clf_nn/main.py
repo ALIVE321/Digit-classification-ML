@@ -28,5 +28,6 @@ if __name__ == "__main__":
     print(X_test.shape, y_test.shape)
 
     test_loader = DataLoader(list(zip(X_test, y_test)), batch_size=256)
+
     test(model, test_loader, loss_func)
     

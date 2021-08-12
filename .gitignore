@@ -1,5 +1,9 @@
 # Data Cache
 *.pickle
+*.tgz
+visualization
+*.png
+data/data.zip
 
 # Pycharm Project OCnfiguration
 .idea/
